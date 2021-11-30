@@ -15,12 +15,16 @@ on:
         required: true
 
 jobs:
-  diff_test:
+  branch_name:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
+      - id: HEAD
+        run: |
+          echo "::set-output name=describe::$(git describe --tags)""
       - run: |
+          echo "${{ steps.HEAD.outputs.describe }}"
           echo "${{ github.event.inputs.message }}"
           echo "${{ github.event.inputs.versioning_level }}"
 
