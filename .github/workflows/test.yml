@@ -72,7 +72,7 @@ jobs:
         run: |
           VERSION=v${major}.${minor}.${patch}
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
-	        git config --local user.name "github-actions[bot]"
+          git config --local user.name "github-actions[bot]"
           git switch -c "release-${VERSION}" 
           echo "${VERSION}" > VERSION
           git add VERSION
