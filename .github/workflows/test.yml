@@ -23,3 +23,8 @@ jobs:
       - run: |
           echo "${{ github.event.inputs.message }}"
           echo "${{ github.event.inputs.versioning_level }}"
+
+#      - run: |
+#          gh pr list --label "Production Release" | grep "develop" \
+#            || gh pr create --base master --title "本番反映" --body "**マージすると本番にリリースされます。**" --label "Production Release"
+#
