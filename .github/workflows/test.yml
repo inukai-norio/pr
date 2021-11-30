@@ -43,7 +43,7 @@ jobs:
         if: github.event.inputs.versioning_level == 'major'
         shell: bash
         env:
-          mejor: ${{ steps.latest_version.outputs.major }}
+          major: ${{ steps.latest_version.outputs.major }}
           minor: ${{ steps.latest_version.outputs.minor }}
           patch: ${{ steps.latest_version.outputs.patch }}
         run: |
@@ -54,7 +54,7 @@ jobs:
         if: github.event.inputs.versioning_level == 'minor'
         shell: bash
         env:
-          mejor: ${{ steps.latest_version.outputs.major }}
+          major: ${{ steps.latest_version.outputs.major }}
           minor: ${{ steps.latest_version.outputs.minor }}
           patch: ${{ steps.latest_version.outputs.patch }}
         run: |
@@ -65,7 +65,7 @@ jobs:
         if: github.event.inputs.versioning_level == 'patch'
         shell: bash
         env:
-          mejor: ${{ steps.latest_version.outputs.major }}
+          major: ${{ steps.latest_version.outputs.major }}
           minor: ${{ steps.latest_version.outputs.minor }}
           patch: ${{ steps.latest_version.outputs.patch }}
         run: |
