@@ -25,10 +25,24 @@ jobs:
       - id: HEAD
         run: |
           echo "::set-output name=describe::$(git describe --tags)"
-      - run: |
+
+      - name: Is major
+        if: github.event.inputs.versioning_level == 'major'
+        run: |
           echo "${{ steps.HEAD.outputs.describe }}"
           echo "${{ github.event.inputs.message }}"
-          echo "${{ github.event.inputs.versioning_level }}"
+
+      - name: Is minor
+        if: github.event.inputs.versioning_level == 'minor'
+        run: |
+          echo "${{ steps.HEAD.outputs.describe }}"
+          echo "${{ github.event.inputs.message }}"
+
+      - name: Is patch
+        if: github.event.inputs.versioning_level == 'patch'
+        run: |
+          echo "${{ steps.HEAD.outputs.describe }}"
+          echo "${{ github.event.inputs.message }}"
 
 #      - run: |
 #          gh pr list --label "Production Release" | grep "develop" \
