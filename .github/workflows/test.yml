@@ -22,26 +22,30 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - id: HEAD
+      - id: describe
         run: |
-          echo "::set-output name=describe::$(git describe --tags)"
+          echo "::set-output name=all::$(git describe --tags)"
+          echo "::set-output name=latest_tag::$(git describe --abbrev=0 --tags)"
 
       - name: Is major
         if: github.event.inputs.versioning_level == 'major'
         run: |
-          echo "${{ steps.HEAD.outputs.describe }}"
+          echo "${{ steps.describe.outputs.all }}"
+          echo "${{ steps.describe.outputs.latest_tag }}"
           echo "${{ github.event.inputs.message }}"
 
       - name: Is minor
         if: github.event.inputs.versioning_level == 'minor'
         run: |
-          echo "${{ steps.HEAD.outputs.describe }}"
+          echo "${{ steps.describe.outputs.all }}"
+          echo "${{ steps.describe.outputs.latest_tag }}"
           echo "${{ github.event.inputs.message }}"
 
       - name: Is patch
         if: github.event.inputs.versioning_level == 'patch'
         run: |
-          echo "${{ steps.HEAD.outputs.describe }}"
+          echo "${{ steps.describe.outputs.all }}"
+          echo "${{ steps.describe.outputs.latest_tag }}"
           echo "${{ github.event.inputs.message }}"
 
 #      - run: |
