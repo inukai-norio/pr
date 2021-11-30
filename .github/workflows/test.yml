@@ -48,15 +48,15 @@ jobs:
           patch: ${{ steps.latest_version.outputs.patch }}
           versioning_level: ${{ github.event.inputs.versioning_level }}
         run: |
-          if [ versioning_level = 'major' ]; then
+          if [ ${versioning_level} = 'major' ]; then
             echo "::set-output name=major::$((${major}+1))"
             echo "::set-output name=minor::0"
             echo "::set-output name=patch::0"
-          elif [ versioning_level = 'minor' ]; then
+          elif [ ${versioning_level} = 'minor' ]; then
             echo "::set-output name=major::${major})"
             echo "::set-output name=minor::$((${minor}+1))"
             echo "::set-output name=patch::0"
-          elif [ versioning_level = 'patch' ]; then
+          elif [ ${versioning_level} = 'patch' ]; then
             echo "::set-output name=major::${major}"
             echo "::set-output name=minor::${minor}"
             echo "::set-output name=patch::$((${patch}+1))"
