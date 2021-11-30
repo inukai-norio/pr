@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v2
       - id: HEAD
         run: |
-          echo "::set-output name=describe::$(git describe --tags)""
+          echo "::set-output name=describe::$(git describe --tags)"
       - run: |
           echo "${{ steps.HEAD.outputs.describe }}"
           echo "${{ github.event.inputs.message }}"
