@@ -81,7 +81,7 @@ jobs:
           git commit -m "version up (${VERSION})"
           git push origin release-${VERSION}
 
-      - name: 
+      - name: create pr
         env:
           major: ${{ steps.version.outputs.major }}
           minor: ${{ steps.version.outputs.minor }}
