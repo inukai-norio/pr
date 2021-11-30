@@ -63,7 +63,11 @@ jobs:
           else
             return 1
           fi
-      - name: a
+      - name: git config
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+      - name: git push
         env:
           major: ${{ steps.version.outputs.major }}
           minor: ${{ steps.version.outputs.minor }}
@@ -71,8 +75,6 @@ jobs:
           versioning_level: ${{ github.event.inputs.versioning_level }}
         run: |
           VERSION=v${major}.${minor}.${patch}
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
           git switch -c "release-${VERSION}" 
           echo "${VERSION}" > VERSION
           git add VERSION
