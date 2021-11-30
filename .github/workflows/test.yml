@@ -21,5 +21,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-        echo "${{ github.event.inputs.message }}"
-        echo "${{ github.event.inputs.versioning_level }}"
+          echo "${{ github.event.inputs.message }}"
+          echo "${{ github.event.inputs.versioning_level }}"
