@@ -86,6 +86,7 @@ jobs:
           major: ${{ steps.version.outputs.major }}
           minor: ${{ steps.version.outputs.minor }}
           patch: ${{ steps.version.outputs.patch }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           VERSION=v${major}.${minor}.${patch}
           gh pr create --base master --head release-${VERSION} --title "${VERSION} さくせい" --body "test"
