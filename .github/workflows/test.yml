@@ -81,7 +81,11 @@ jobs:
           git commit -m "version up (${VERSION})"
           git push origin release-${VERSION}
 
-#      - run: |
-#          gh pr list --label "Production Release" | grep "develop" \
-#            || gh pr create --base master --title "本番反映" --body "**マージすると本番にリリースされます。**" --label "Production Release"
-#
+      - name: 
+        env:
+          major: ${{ steps.version.outputs.major }}
+          minor: ${{ steps.version.outputs.minor }}
+          patch: ${{ steps.version.outputs.patch }}
+        run: |
+          VERSION=v${major}.${minor}.${patch}
+          gh pr create --base master --head release-${VERSION} --title "${VERSION} さくせい" --body "test"
