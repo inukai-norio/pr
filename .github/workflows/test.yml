@@ -39,44 +39,38 @@ jobs:
           else
             return 1
           fi
-      - name: Is major
+      - name: output version
         id: version
-        if: github.event.inputs.versioning_level == 'major'
         shell: bash
         env:
           major: ${{ steps.latest_version.outputs.major }}
           minor: ${{ steps.latest_version.outputs.minor }}
           patch: ${{ steps.latest_version.outputs.patch }}
+          versioning_level: ${{ github.event.inputs.versioning_level }}
         run: |
-          echo "::set-output name=major::$((${major}+1))"
-          echo "::set-output name=minor::0"
-          echo "::set-output name=patch::0"
-
-      - name: Is minor
-        id: version
-        if: github.event.inputs.versioning_level == 'minor'
-        shell: bash
+          if [ versioning_level = 'major' ]; then
+            echo "::set-output name=major::$((${major}+1))"
+            echo "::set-output name=minor::0"
+            echo "::set-output name=patch::0"
+          elif [ versioning_level = 'minor' ]; then
+            echo "::set-output name=major::${major})"
+            echo "::set-output name=minor::$((${minor}+1))"
+            echo "::set-output name=patch::0"
+          elif [ versioning_level = 'patch' ]; then
+            echo "::set-output name=major::${major}"
+            echo "::set-output name=minor::${minor}"
+            echo "::set-output name=patch::$((${patch}+1))"
+          else
+            return 1
+          fi
+      - name: a
         env:
-          major: ${{ steps.latest_version.outputs.major }}
-          minor: ${{ steps.latest_version.outputs.minor }}
-          patch: ${{ steps.latest_version.outputs.patch }}
+          major: ${{ steps.version.outputs.major }}
+          minor: ${{ steps.version.outputs.minor }}
+          patch: ${{ steps.version.outputs.patch }}
+          versioning_level: ${{ github.event.inputs.versioning_level }}
         run: |
-          echo "::set-output name=major::${major})"
-          echo "::set-output name=minor::$((${minor}+1))"
-          echo "::set-output name=patch::0"
-
-      - name: Is patch
-        id: version
-        if: github.event.inputs.versioning_level == 'patch'
-        shell: bash
-        env:
-          major: ${{ steps.latest_version.outputs.major }}
-          minor: ${{ steps.latest_version.outputs.minor }}
-          patch: ${{ steps.latest_version.outputs.patch }}
-        run: |
-          echo "::set-output name=major::${major}"
-          echo "::set-output name=minor::${minor}"
-          echo "::set-output name=patch::$((${patch}+1))"
+          echo "v${major}.${minor}.${patch}"
 
 #      - run: |
 #          gh pr list --label "Production Release" | grep "develop" \
