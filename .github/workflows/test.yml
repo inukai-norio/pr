@@ -1,0 +1,25 @@
+name: Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      versioning_level:
+        type: choice
+        required: true
+        description: level
+        options: 
+        - major
+        - minor
+        - patch
+      message:
+        required: true
+
+jobs:
+  diff_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+        echo "${{ github.event.inputs.message }}"
+        echo "${{ github.event.inputs.versioning_level }}"
