@@ -24,6 +24,8 @@ jobs:
           fetch-depth: 0
       - id: status
         shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "::set-output name=pr::$(gh pr list --state open --base master --head 'release-v*' --author 'app/github-actions')"
           echo "::set-output name=describe::$(git describe --tags)"
