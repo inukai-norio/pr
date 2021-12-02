@@ -57,7 +57,7 @@ jobs:
             echo "::set-output name=minor::0"
             echo "::set-output name=patch::0"
           elif [ ${versioning_level} = 'minor' ]; then
-            echo "::set-output name=major::${major})"
+            echo "::set-output name=major::${major}"
             echo "::set-output name=minor::$((${minor}+1))"
             echo "::set-output name=patch::0"
           elif [ ${versioning_level} = 'patch' ]; then
