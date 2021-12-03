@@ -125,8 +125,8 @@ jobs:
           VERSION: ${{ needs.version.outputs.next_tag }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr comment $(echo ${pr} | cut -f1) --body "
+          gh pr comment $(echo ${pr} | cut -f1) --body "\"
           ${VERSION} release 依頼が来ています。
           こちらの PR があるので、キャンセルされました。
-          "
+          \""
 
