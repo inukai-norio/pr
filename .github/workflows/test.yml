@@ -18,7 +18,7 @@ jobs:
   version:
     runs-on: ubuntu-latest
     outputs:
-      pr: ${{ steps.status.outputs.pr }}
+      pr_count: ${{ steps.status.outputs.pr_count }}
       major: ${{ steps.version.outputs.major }}
       minor: ${{ steps.version.outputs.minor }}
       patch: ${{ steps.version.outputs.patch }}
@@ -33,6 +33,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "::set-output name=pr::$(gh pr list --state open --base master --head 'release-v*' --author 'app/github-actions')"
+          echo "::set-output name=pr_count::$(gh pr list --state open --base master --head 'release-v*' --author 'app/github-actions' | wc -l)"
           echo "::set-output name=describe::$(git describe --tags)"
           echo "::set-output name=latest_tag::$(git describe --abbrev=0 --tags)"
 
