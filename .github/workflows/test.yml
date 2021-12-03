@@ -18,15 +18,9 @@ jobs:
   branch_name:
     runs-on: ubuntu-latest
     outputs:
-      latest_tag: ${{ steps.status.outputs.latest_tag }}
-      now_version:
-        major: ${{ steps.latest_version.outputs.major }}
-        minor: ${{ steps.latest_version.outputs.minor }}
-        patch: ${{ steps.latest_version.outputs.patch }}
-      next_version:
-        major: ${{ steps.version.outputs.major }}
-        minor: ${{ steps.version.outputs.minor }}
-        patch: ${{ steps.version.outputs.patch }}
+      major: ${{ steps.version.outputs.major }}
+      minor: ${{ steps.version.outputs.minor }}
+      patch: ${{ steps.version.outputs.patch }}
 
     steps:
       - uses: actions/checkout@v2
