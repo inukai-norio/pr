@@ -76,7 +76,6 @@ jobs:
           major: ${{ steps.version.outputs.major }}
           minor: ${{ steps.version.outputs.minor }}
           patch: ${{ steps.version.outputs.patch }}
-          versioning_level: ${{ github.event.inputs.versioning_level }}
         run: |
           VERSION=v${major}.${minor}.${patch}
           git switch -c "release-${VERSION}" 
