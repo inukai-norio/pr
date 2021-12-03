@@ -15,9 +15,10 @@ on:
         required: true
 
 jobs:
-  branch_name:
+  version:
     runs-on: ubuntu-latest
     outputs:
+      pr: ${{ steps.status.outputs.pr }}
       major: ${{ steps.version.outputs.major }}
       minor: ${{ steps.version.outputs.minor }}
       patch: ${{ steps.version.outputs.patch }}
