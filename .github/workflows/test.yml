@@ -29,8 +29,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "::set-output name=pr_list::$(gh pr list --state open --base master --head 'release-v*' --author 'app/github-actions')"
-          echo "::set-output name=pr_count::$(gh pr list --state open --base master --head 'release-v*' --author 'app/github-actions' | wc -l)"
+          echo "::set-output name=pr_list::$(gh pr list --state open --base master --head 'release/v*' --author 'app/github-actions')"
+          echo "::set-output name=pr_count::$(gh pr list --state open --base master --head 'release/v*' --author 'app/github-actions' | wc -l)"
           echo "::set-output name=describe::$(git describe --tags)"
           echo "::set-output name=latest_tag::$(git describe --abbrev=0 --tags)"
 
@@ -94,11 +94,11 @@ jobs:
         env:
           VERSION: ${{ needs.version.outputs.next_tag }}
         run: |
-          git switch -c "release-${VERSION}" 
+          git switch -c "release/${VERSION}" 
           echo "${VERSION}" > VERSION
           git add VERSION
           git commit -m "version up (${VERSION})"
-          git push origin release-${VERSION}
+          git push origin release/${VERSION}
 
       - name: create pr
         env:
@@ -106,7 +106,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "$VERSION ${{ steps.status.outputs.pr }}"
-          gh pr create --base master --head release-${VERSION} --title "${VERSION} さくせい" --body "test"
+          gh pr create --base master --head release/${VERSION} --title "${VERSION} さくせい" --body "test"
 
   comment_pr:
     runs-on: ubuntu-latest
