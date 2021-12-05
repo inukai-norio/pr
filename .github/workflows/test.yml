@@ -1,4 +1,4 @@
-name: crate ${{ github.event.inputs.versioning_level }} release
+name: crate release
 
 on:
   workflow_dispatch:
