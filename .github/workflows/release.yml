@@ -51,4 +51,4 @@ jobs:
         run: |
           URL=$(gh pr create --base master --head release/tag --title "$VERSION" --body "")
           sleep 5
-          gh pr merge "$URL"
+          gh pr merge "$URL" --admin
