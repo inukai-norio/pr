@@ -8,9 +8,9 @@ on:
         required: true
         description: level
         options: 
-        - major
-        - minor
-        - patch
+          - patch
+          - minor
+          - major
 
 jobs:
   version:
