@@ -17,7 +17,7 @@ jobs:
         env:
           BRANCH: ${{ github.head_ref }}
         run: |
-          echo "::set-output name=version::$(echo $BRANCH | cut -d'-' -f2-)"
+          echo "::set-output name=version::$(echo $BRANCH | cut -d'/' -f2-)"
 
   add_tag:
     runs-on: ubuntu-latest
