@@ -50,5 +50,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           URL=$(gh pr create --base master --head release/tag --title "$VERSION" --body "")
+          echo $URL
           sleep 5
           gh pr merge "$URL" --admin
