@@ -2,7 +2,7 @@ name: add release tag
 on:
   pull_request:
     branches:
-      - release/tag
+      - master
     types: [closed]
 
 jobs:
@@ -38,15 +38,3 @@ jobs:
         run: |
           git tag ${VERSION}
           git push origin ${VERSION}
-  create_pr_and_merge:
-    runs-on: ubuntu-latest
-    needs: [check_version]
-    steps:
-      - uses: actions/checkout@v2
-      - name: 
-        shell: bash
-        env:
-          VERSION: ${{ needs.check_version.outputs.version }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh pr merge "$(gh pr create --base master --head release/tag --title "$VERSION" --body "")" -m
