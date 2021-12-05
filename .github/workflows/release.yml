@@ -52,4 +52,4 @@ jobs:
           URL=$(gh pr create --base master --head release/tag --title "$VERSION" --body "")
           echo $URL
           sleep 5
-          gh pr merge "$URL" --admin
+          gh pr merge "$URL" -m
